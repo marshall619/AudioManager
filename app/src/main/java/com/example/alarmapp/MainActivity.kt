@@ -36,6 +36,7 @@ import com.example.alarmapp.ui.theme.AlarmAppTheme
 import com.example.alarmapp.viewModel.TimeDbViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
 import java.util.Calendar
 
 @AndroidEntryPoint
@@ -72,8 +73,19 @@ class MainActivity : ComponentActivity() {
                 startActivity(Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS))
             }
 
-            var audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+            val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
+            val viewModel by viewModels<TimeDbViewModel>()
+            viewModel.allTimesInDay("th")
+            var allList by remember {
+                mutableStateOf(emptyList<Time>())
+            }
 
+            LaunchedEffect(true){
+                viewModel.allTimeInDayList.collectLatest {
+                    allList = it
+                }
+            }
+            
             AlarmAppTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
@@ -93,6 +105,24 @@ class MainActivity : ComponentActivity() {
                             audioManager.ringerMode = AudioManager.RINGER_MODE_NORMAL
                         }
                         Spacer(modifier = Modifier.height(40.dp))
+                        Button(onClick = { 
+                            viewModel.insertNewTimeAction(
+                                Time(s_hour = 5, s_min =4 , e_min = 3, e_hour = 2, title = "idk", day = "th", activeState = true)
+                            )
+                        }) {
+                            Text(text = "insert")
+                        }
+                        Button(onClick = { 
+                            viewModel.deleteAllTimes()
+                        }) {
+                            Text(text = "delete all")
+                        }
+                        
+                        LazyColumn(modifier = Modifier.fillMaxWidth()){
+                            items(allList){
+                                Text(text = it.title)
+                            }
+                        }
                     }
                 }
             }
