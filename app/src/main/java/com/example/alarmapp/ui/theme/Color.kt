@@ -20,3 +20,25 @@ val Colors.simpleBackground : Color
 val Colors.simpleTextColor : Color
     @Composable
     get() = if (isSystemInDarkTheme()) Color(0xFFF7F7F7) else Color(0xFF000000)
+
+val Colors.boxColors : Color
+    @Composable
+    get() = if (isSystemInDarkTheme()) Color(0xFF232524) else Color(0xFFFAFFF9)
+
+val Colors.boxOnOffColors : Color
+    @Composable
+    get() = if (isSystemInDarkTheme()) Color(0xFF0073DD) else Color(0xFF0073DD)
+
+val Colors.boxPlusColors : Color
+    @Composable
+    get() = if (isSystemInDarkTheme()) Color(0xFF232524) else Color(0xFFffffff)
+
+val Colors.bottomHomeBrush : List<Color>
+    @Composable
+    get() = if (isSystemInDarkTheme()) listOf(
+        Color(0x0),
+        Color(0xff000000)
+    ) else listOf(
+        Color(0xFFFFFF),
+        Color(0xFFFFFFFF)
+    )
