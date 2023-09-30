@@ -101,7 +101,7 @@ private fun ChangeTopBarColor() {
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter", "UnrememberedMutableState")
 @Composable
 private fun StartAppUi(navHostController: NavHostController) {
-    CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
+    CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
         Scaffold(bottomBar = {
 
         }) {

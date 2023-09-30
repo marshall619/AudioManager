@@ -34,6 +34,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.alarmapp.R
+import com.example.alarmapp.data.model.Time
+import com.example.alarmapp.navigation.Screens
 import com.example.alarmapp.ui.theme.bottomHomeBrush
 import com.example.alarmapp.ui.theme.boxColors
 import com.example.alarmapp.ui.theme.boxPlusColors
@@ -78,125 +80,18 @@ private fun HomeScreen(navController: NavHostController) {
                     .nestedScroll(nestedScrollConnection)
             ) {
                 item {
-                    Surface(
-                        elevation = 4.dp,
-                        color = MaterialTheme.colors.boxColors,
-                        shape = RoundedCornerShape(16.dp),
-                        modifier = Modifier.padding(vertical = 10.dp)
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(120.dp)
-                                .padding(vertical = 6.dp)
-                                .clip(RoundedCornerShape(16.dp))
-                                .background(MaterialTheme.colors.boxColors)
+                    AlarmCardItem(
+                        item = Time(
+                            s_hour = 6,
+                            s_min = 20,
+                            e_hour =23,
+                            e_min =8,
+                            day = "th",
+                            title = "daily alarm for getting up.",
+                            activeState = true
                         )
-                    }
-                    Surface(
-                        elevation = 4.dp,
-                        color = MaterialTheme.colors.boxColors,
-                        shape = RoundedCornerShape(16.dp),
-                        modifier = Modifier.padding(vertical = 10.dp)
                     ) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(120.dp)
-                                .padding(vertical = 6.dp)
-                                .clip(RoundedCornerShape(16.dp))
-                                .background(MaterialTheme.colors.boxColors)
-                        )
-                    }
-                    Surface(
-                        elevation = 4.dp,
-                        color = MaterialTheme.colors.boxColors,
-                        shape = RoundedCornerShape(16.dp),
-                        modifier = Modifier.padding(vertical = 10.dp)
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(120.dp)
-                                .padding(vertical = 6.dp)
-                                .clip(RoundedCornerShape(16.dp))
-                                .background(MaterialTheme.colors.boxColors)
-                        )
-                    }
-                    Surface(
-                        elevation = 4.dp,
-                        color = MaterialTheme.colors.boxColors,
-                        shape = RoundedCornerShape(16.dp),
-                        modifier = Modifier.padding(vertical = 10.dp)
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(120.dp)
-                                .padding(vertical = 6.dp)
-                                .clip(RoundedCornerShape(16.dp))
-                                .background(MaterialTheme.colors.boxColors)
-                        )
-                    }
-                    Surface(
-                        elevation = 4.dp,
-                        color = MaterialTheme.colors.boxColors,
-                        shape = RoundedCornerShape(16.dp),
-                        modifier = Modifier.padding(vertical = 10.dp)
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(120.dp)
-                                .padding(vertical = 6.dp)
-                                .clip(RoundedCornerShape(16.dp))
-                                .background(MaterialTheme.colors.boxColors)
-                        )
-                    }
-                    Surface(
-                        elevation = 4.dp,
-                        color = MaterialTheme.colors.boxColors,
-                        shape = RoundedCornerShape(16.dp),
-                        modifier = Modifier.padding(vertical = 10.dp)
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(120.dp)
-                                .padding(vertical = 6.dp)
-                                .clip(RoundedCornerShape(16.dp))
-                                .background(MaterialTheme.colors.boxColors)
-                        )
-                    }
-                    Surface(
-                        elevation = 4.dp,
-                        color = MaterialTheme.colors.boxColors,
-                        shape = RoundedCornerShape(16.dp),
-                        modifier = Modifier.padding(vertical = 10.dp)
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(120.dp)
-                                .padding(vertical = 6.dp)
-                                .clip(RoundedCornerShape(16.dp))
-                                .background(MaterialTheme.colors.boxColors)
-                        )
-                    }
-                    Surface(
-                        elevation = 4.dp,
-                        color = MaterialTheme.colors.boxColors,
-                        shape = RoundedCornerShape(16.dp),
-                        modifier = Modifier.padding(vertical = 10.dp)
-                    ) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(120.dp)
-                                .padding(vertical = 6.dp)
-                                .clip(RoundedCornerShape(16.dp))
-                                .background(MaterialTheme.colors.boxColors)
-                        )
+                        navController.navigate(Screens.Add.route + "?title=Edit Time")
                     }
                 }
             }
@@ -215,14 +110,18 @@ private fun HomeScreen(navController: NavHostController) {
             enter = slideInVertically(initialOffsetY = { it * 2 }),
             exit = slideOutVertically(targetOffsetY = { it * 2 }),
         ) {
-            Surface(shape = CircleShape, elevation = 6.dp,color = MaterialTheme.colors.boxColors,) {
+            Surface(
+                shape = CircleShape,
+                elevation = 6.dp,
+                color = MaterialTheme.colors.boxColors,
+            ) {
                 Box(
                     modifier = Modifier
                         .size(60.dp)
                         .clip(CircleShape)
                         .background(MaterialTheme.colors.secondary)
                         .clickable {
-                            //todo go to add screen
+                            navController.navigate(Screens.Add.route + "?title=Add Time")
                         },
                     contentAlignment = Alignment.Center
                 ) {
