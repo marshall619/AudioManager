@@ -38,15 +38,22 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.foundation.shape.CircleShape
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.alarmapp.viewModel.TimeDbViewModel
 
 @Composable
-fun AlarmCardItem(item: Time, fontSize: Int = 25, onClick: () -> Unit) {
+fun AlarmCardItem(
+    item: Time,
+    fontSize: Int = 25,
+    viewModel: TimeDbViewModel = hiltViewModel(),
+    onClick: () -> Unit,
+) {
 
     val startHour = if (item.s_hour < 10) "0${item.s_hour}" else "${item.s_hour}"
     val startMin = if (item.s_min < 10) "0${item.s_min}" else "${item.s_min}"
     val endHour = if (item.e_hour < 10) "0${item.e_hour}" else "${item.e_hour}"
     val endMin = if (item.e_min < 10) "0${item.e_min}" else "${item.e_min}"
-    var isButtonOn by remember{ mutableStateOf(item.activeState)}
+    var isButtonOn by remember { mutableStateOf(item.activeState) }
 
     Surface(
         elevation = 4.dp,
@@ -112,8 +119,10 @@ fun AlarmCardItem(item: Time, fontSize: Int = 25, onClick: () -> Unit) {
                         isOn = isButtonOn,
                         size = 35.dp,
                         padding = 5.dp,
-                    ){
+                    ) {
                         isButtonOn = !isButtonOn
+                        item.activeState = isButtonOn
+                        viewModel.updateTime(item)
                     }
                 }
             }
@@ -123,21 +132,21 @@ fun AlarmCardItem(item: Time, fontSize: Int = 25, onClick: () -> Unit) {
 
 @Composable
 fun ThemeSwitcher(
-    isOn : Boolean,
+    isOn: Boolean,
     size: Dp = 150.dp,
     padding: Dp = 10.dp,
     parentShape: Shape = CircleShape,
     toggleShape: Shape = CircleShape,
     animationSpec: AnimationSpec<Dp> = tween(durationMillis = 300),
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     val offset by animateDpAsState(
-        targetValue = if (isOn) 0.dp else size,
+        targetValue = if (!isOn) 0.dp else size,
         animationSpec = animationSpec
     )
 
-    val backGroundColor = if (!isOn) MaterialTheme.colors.secondary else Color(0xffE6E6E6)
-    val backGroundCircleColor = if (isOn) MaterialTheme.colors.secondary else Color(0xffE6E6E6)
+    val backGroundColor = if (isOn) MaterialTheme.colors.secondary else Color(0xffE6E6E6)
+    val backGroundCircleColor = if (!isOn) MaterialTheme.colors.secondary else Color(0xffE6E6E6)
 
     Box(modifier = Modifier
         .width(size * 2)

@@ -44,4 +44,10 @@ class TimeDbViewModel @Inject constructor(
         }
     }
 
+    fun updateTime(time: Time){
+        viewModelScope.launch {
+            repository.updateTime(time)
+        }
+    }
+
 }

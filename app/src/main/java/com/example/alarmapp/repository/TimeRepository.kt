@@ -17,4 +17,6 @@ class TimeRepository @Inject constructor(
 
     suspend fun deleteAllTimes() = dao.deleteAllTimes()
 
+    suspend fun updateTime(time: Time) = dao.updateTime(time)
+
 }

@@ -14,5 +14,5 @@ data class Time(
     val e_min : Int,
     val title : String,
     val day : String,
-    val activeState : Boolean
+    var activeState : Boolean
 )

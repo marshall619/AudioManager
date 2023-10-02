@@ -33,6 +33,14 @@ val Colors.boxPlusColors : Color
     @Composable
     get() = if (isSystemInDarkTheme()) Color(0xFF232524) else Color(0xFFffffff)
 
+val Colors.editTextBackground : Color
+    @Composable
+    get() = if (isSystemInDarkTheme()) Color(0xFF242424) else Color(0xFFD5D5D5)
+
+val Colors.addButtonColor : Color
+    @Composable
+    get() = if (isSystemInDarkTheme()) Color(0xFF6750A4) else Color(0xFFEADDFF)
+
 val Colors.bottomHomeBrush : List<Color>
     @Composable
     get() = if (isSystemInDarkTheme()) listOf(

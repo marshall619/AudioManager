@@ -5,14 +5,17 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.media.AudioManager
 import android.os.Bundle
 import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.alarmapp.ui.components.AppConfig
 import com.example.alarmapp.ui.components.GetPermission
+import com.example.alarmapp.util.Constants
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -24,7 +27,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 
-
+            Constants.audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager
             nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             navHostController = rememberNavController()
             AppConfig(navController = navHostController , nm){

@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.example.alarmapp.data.model.Time
 import kotlinx.coroutines.flow.Flow
 
@@ -21,5 +22,8 @@ interface TimeDao {
 
     @Query("DELETE FROM time_table")
     suspend fun deleteAllTimes()
+
+    @Update
+    suspend fun updateTime(time: Time)
 
 }
